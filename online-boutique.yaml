@@ -1,0 +1,17 @@
+'''
+cd ~
+git clone https://github.com/GoogleCloudPlatform/microservices-demo.git
+cd microservices-demo
+kubectl create namespace online-boutique
+kubectl label namespace online-boutique istio-injection=enabled
+#加上 YuniKorn annotation：
+kubectl annotate namespace online-boutique yunikorn.apache.org/scheduler=yunikorn
+
+
+kubectl apply -n online-boutique -f ./release/kubernetes-manifests.yaml
+kubectl apply -n online-boutique -f ./istio-manifests/frontend-gateway.yaml
+
+
+kubectl port-forward -n istio-system service/istio-ingressgateway 8080:80
+
+'''

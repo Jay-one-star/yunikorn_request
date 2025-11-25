@@ -1,0 +1,6 @@
+'''
+kubectl edit configmap yunikorn-configs -n yunikorn
+
+kubectl delete pod -l app=yunikorn -n yunikorn
+
+'''

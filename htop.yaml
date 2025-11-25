@@ -1,0 +1,50 @@
+'''
+ 建立腳本 collect-cluster-stats.sh
+#!/bin/bash
+# collect-cluster-stats.sh
+# 每 3 分鐘收集系統與 Kubernetes cluster 資料
+
+# 設定輸出目錄
+OUTDIR="$HOME/cluster_logs"
+mkdir -p "$OUTDIR"
+
+# 取得時間戳
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+
+# --- 系統資源監控 ---
+# CPU、記憶體、swap、load
+echo "=== 系統資源 ===" > "$OUTDIR/system_$TIMESTAMP.txt"
+echo "---- top 20 processes ----" >> "$OUTDIR/system_$TIMESTAMP.txt"
+top -b -n 1 | head -n 20 >> "$OUTDIR/system_$TIMESTAMP.txt"
+echo "---- vmstat 5次取樣 ----" >> "$OUTDIR/system_$TIMESTAMP.txt"
+vmstat 1 5 >> "$OUTDIR/system_$TIMESTAMP.txt"
+echo "---- free memory ----" >> "$OUTDIR/system_$TIMESTAMP.txt"
+free -h >> "$OUTDIR/system_$TIMESTAMP.txt"
+echo "---- load average ----" >> "$OUTDIR/system_$TIMESTAMP.txt"
+uptime >> "$OUTDIR/system_$TIMESTAMP.txt"
+
+# --- Kubernetes 資源監控 ---
+echo "=== Kubernetes 資源 ===" > "$OUTDIR/k8s_$TIMESTAMP.txt"
+echo "---- 所有 Namespace Pod 狀態 ----" >> "$OUTDIR/k8s_$TIMESTAMP.txt"
+kubectl get pods -A -o wide >> "$OUTDIR/k8s_$TIMESTAMP.txt"
+echo "---- Node 資源使用 ----" >> "$OUTDIR/k8s_$TIMESTAMP.txt"
+kubectl top nodes >> "$OUTDIR/k8s_$TIMESTAMP.txt" 2>/dev/null
+echo "---- Pod 資源使用 ----" >> "$OUTDIR/k8s_$TIMESTAMP.txt"
+kubectl top pods -A >> "$OUTDIR/k8s_$TIMESTAMP.txt" 2>/dev/null
+
+# 日誌完成提示
+echo "[$(date)] 收集完成：$OUTDIR/system_$TIMESTAMP.txt , $OUTDIR/k8s_$TIMESTAMP.txt"
+
+ 設定自動每 3 分鐘執行
+方法 A:用 cron
+開啟 crontab:
+crontab -e
+
+新增：
+*/3 * * * * /home/ama111138/collect-cluster-stats.sh
+
+每 3 分鐘自動執行
+
+
+日誌會存到 ~/cluster_logs/
+'''

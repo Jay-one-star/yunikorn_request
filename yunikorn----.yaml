@@ -1,0 +1,39 @@
+'''
+建立檔案 yunikorn-test-ns.yaml,內容如下：
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: yunikorn-test
+  annotations:
+    yunikorn.apache.org/scheduler: "yunikorn"
+
+套用 namespace:
+kubectl apply -f yunikorn-test-ns.yaml
+確認 namespace 存在：
+kubectl get ns
+
+建立測試資料夾
+在你的 home 目錄下建立資料夾：
+
+mkdir ~/yunikorn-test
+cd ~/yunikorn-test
+
+ 給執行權限並執行
+
+儲存檔案，例如 loop-deploy-200.sh
+
+
+給執行權限：
+chmod +x loop-deploy-200.sh
+
+執行：
+\./loop-deploy-200.sh
+
+ 觀察結果
+kubectl get pods -n yunikorn-test -o wide
+
+你會看到每輪 Pod 被 YuniKorn 排到哪個 Node
+
+
+觀察 BinPack 是否生效
+'''
