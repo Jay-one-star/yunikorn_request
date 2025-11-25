@@ -9,4 +9,10 @@ helm install yunikorn yunikorn/yunikorn -n yunikorn
 kubectl get pods -n yunikorn
 
 
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+kubectl delete pod -n yunikorn yunikorn-admission-controller-6b86bc76b4-f7qwd
+kubectl delete pod -n yunikorn yunikorn-scheduler-85dc96ffbc-2pqjg
+
+
 '''
+
