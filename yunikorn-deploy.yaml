@@ -17,8 +17,26 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 kubectl delete pod -n yunikorn yunikorn-admission-controller-6b86bc76b4-f7qwd
 kubectl delete pod -n yunikorn yunikorn-scheduler-85dc96ffbc-2pqjg
 
+sudo apt update
+sudo apt install -y git openjdk-11-jdk maven
+java -version
+mvn -v
+# 核心排程邏輯
+git clone https://github.com/apache/incubator-yunikorn-core.git
+
+# Kubernetes 適配層
+git clone https://github.com/apache/incubator-yunikorn-k8shim.git
+
+# 排程接口
+git clone https://github.com/apache/incubator-yunikorn-scheduler-interface.git
+
+# Web UI
+git clone https://github.com/apache/incubator-yunikorn-web.git
+mvn clean install -DskipTests
+
 
 '''
+
 
 
 
