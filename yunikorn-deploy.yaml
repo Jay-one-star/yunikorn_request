@@ -1,6 +1,8 @@
 '''
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
+curl -O https://raw.githubusercontent.com/apache/incubator-yunikorn-release/master/deploy/kubernetes/yunikorn.yaml
+
 
 helm repo add yunikorn https://apache.github.io/yunikorn-release
 helm repo update
@@ -15,4 +17,5 @@ kubectl delete pod -n yunikorn yunikorn-scheduler-85dc96ffbc-2pqjg
 
 
 '''
+
 
