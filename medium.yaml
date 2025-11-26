@@ -1,22 +1,4 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: test-medium
-  labels:
-    app: test-medium
-spec:
-  schedulerName: yunikorn
-  restartPolicy: Never
-  containers:
-    - name: medium
-      image: busybox
-      command: ["sh", "-c", "echo medium pod running; sleep 10; exit 0"]
-      resources:
-        requests:
-          cpu: "500m"
-          memory: "512Mi"
-        limits:
-          cpu: "1"
-          memory: "1Gi"
-
-
+#!/bin/sh
+echo "Medium workload running"
+sleep 8
+exit 0
