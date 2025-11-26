@@ -3,6 +3,12 @@ sudo tar Cxzvvf /usr/local/bin nerdctl-full-1.7.6-linux-amd64.tar.gz
 
 sudo tar -xvzf nerdctl-full-1.7.6-linux-amd64.tar.gz -C /usr/local/bin
 
+wget https://github.com/containerd/nerdctl/releases/download/v1.7.7/nerdctl-full-1.7.7-linux-amd64.tar.gz
+sudo tar zxvf nerdctl-full-1.7.7-linux-amd64.tar.gz -C /usr/local
+echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+
 nerdctl build -t mytest/small:1.0 .
 nerdctl build -t mytest/medium:1.0 .
 nerdctl build -t mytest/large:1.0 .
