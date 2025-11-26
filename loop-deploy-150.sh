@@ -45,3 +45,7 @@ echo "=== YAML 已產生：$OUTPUT_FILE ==="
 echo "=== 使用以下指令部署 150 個 Pods ==="
 echo
 echo "kubectl apply -f $OUTPUT_FILE"
+
+kubectl annotate namespace yunikorn-test yunikorn.apache.org/scheduler=yunikorn
+kubectl annotate namespace online-boutique yunikorn.apache.org/scheduler=yunikorn
+kubectl apply -f ~/pods-150.yaml
