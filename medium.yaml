@@ -5,10 +5,12 @@ metadata:
   labels:
     app: test-medium
 spec:
+  schedulerName: yunikorn
+  restartPolicy: Never
   containers:
     - name: medium
       image: busybox
-      command: ["sh", "-c", "echo medium pod running; sleep 600"]
+      command: ["sh", "-c", "echo medium pod running; sleep 10; exit 0"]
       resources:
         requests:
           cpu: "500m"
@@ -16,3 +18,5 @@ spec:
         limits:
           cpu: "1"
           memory: "1Gi"
+
+
