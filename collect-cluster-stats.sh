@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH=/usr/local/bin:/usr/bin:/bin:/snap/bin
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 LOGFILE="cluster-stats-$TIMESTAMP.txt"
 
@@ -24,3 +25,4 @@ crontab -e
 */3 * * * *  /home/ama111138/yunikorn-test/collect-cluster-stats.sh
 
 '''
+
