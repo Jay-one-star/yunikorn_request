@@ -14,7 +14,7 @@ spec:
         app: small
     spec:
       schedulerName: yunikorn
-      restartPolicy: Never
+      restartPolicy: Always
       containers:
         - name: small
           image: mytest/small:1.0
@@ -43,7 +43,7 @@ spec:
         app: medium
     spec:
       schedulerName: yunikorn
-      restartPolicy: Never
+      restartPolicy: Always
       containers:
         - name: medium
           image: mytest/medium:1.0
@@ -72,7 +72,7 @@ spec:
         app: large
     spec:
       schedulerName: yunikorn
-      restartPolicy: Never
+      restartPolicy: Always
       containers:
         - name: large
           image: mytest/large:1.0
@@ -89,5 +89,6 @@ spec:
 kubectl annotate namespace yunikorn-test yunikorn.apache.org/scheduler=yunikorn
 kubectl annotate namespace online-boutique yunikorn.apache.org/scheduler=yunikorn
 kubectl apply -f ~/pods-150.yaml
+
 
 
