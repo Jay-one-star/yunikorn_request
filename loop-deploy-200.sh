@@ -1,6 +1,8 @@
 curl -LO https://github.com/containerd/nerdctl/releases/download/v1.7.6/nerdctl-full-1.7.6-linux-amd64.tar.gz
 sudo tar Cxzvvf /usr/local/bin nerdctl-full-1.7.6-linux-amd64.tar.gz
 
+sudo tar -xvzf nerdctl-full-1.7.6-linux-amd64.tar.gz -C /usr/local/bin
+
 nerdctl build -t mytest/small:1.0 .
 nerdctl build -t mytest/medium:1.0 .
 nerdctl build -t mytest/large:1.0 .
