@@ -89,6 +89,10 @@ spec:
 kubectl annotate namespace yunikorn-test yunikorn.apache.org/scheduler=yunikorn
 kubectl annotate namespace online-boutique yunikorn.apache.org/scheduler=yunikorn
 kubectl apply -f ~/pods-150.yaml
+kubectl delete deployment small-pods medium-pods large-pods -n yunikorn-test
+kubectl get pods -n yunikorn-test   # 確認 Pod 已刪除
+kubectl delete -f ~/yunikorn-test/pods-150.yaml
+
 
 
 
