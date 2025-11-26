@@ -24,7 +24,7 @@ spec:
   containers:
     - name: ${TYPE}
       image: busybox
-      command: ["sh", "-c", "sleep 5"]
+      command: ["sh", "-c", "echo ${TYPE} pod running; sleep 10; exit 0"]
       resources:
         requests:
           cpu: "$CPU"
@@ -36,16 +36,18 @@ EOF
   done
 }
 
-# 產生 small/medium/large 各 50 個
-generate_pod "small"  "100m"  "128Mi" 50
-generate_pod "medium" "500m"  "512Mi" 50
-generate_pod "large"  "1500m" "1Gi"   50
+# small / medium / large 各 50 個
+generate_pod "small"  "100m"   "128Mi" 50
+generate_pod "medium" "500m"   "512Mi" 50
+generate_pod "large"  "1500m"  "1Gi"   50
 
 echo "=== YAML 已產生：$OUTPUT_FILE ==="
 echo "=== 使用以下指令部署 150 個 Pods ==="
 echo
 echo "kubectl apply -f $OUTPUT_FILE"
 
+
 kubectl annotate namespace yunikorn-test yunikorn.apache.org/scheduler=yunikorn
 kubectl annotate namespace online-boutique yunikorn.apache.org/scheduler=yunikorn
 kubectl apply -f ~/pods-150.yaml
+
