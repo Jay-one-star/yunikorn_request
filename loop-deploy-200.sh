@@ -1,14 +1,12 @@
-docker save mytest/small:1.0 -o small.tar
-docker save mytest/medium:1.0 -o medium.tar
-docker save mytest/large:1.0 -o large.tar
+curl -LO https://github.com/containerd/nerdctl/releases/download/v1.7.6/nerdctl-full-1.7.6-linux-amd64.tar.gz
+sudo tar Cxzvvf /usr/local/bin nerdctl-full-1.7.6-linux-amd64.tar.gz
 
-scp small.tar ama111138@ama111138-host:/home/ama111138/
-scp medium.tar ama111138@ama111138-host:/home/ama111138/
-scp large.tar ama111138@ama111138-host:/home/ama111138/
+nerdctl build -t mytest/small:1.0 .
+nerdctl build -t mytest/medium:1.0 .
+nerdctl build -t mytest/large:1.0 .
 
-sudo ctr -n=k8s.io images import small.tar
-sudo ctr -n=k8s.io images import medium.tar
-sudo ctr -n=k8s.io images import large.tar
+nerdctl save mytest/small:1.0 | sudo ctr -n=k8s.io images import -
+nerdctl save mytest/medium:1.0 | sudo ctr -n=k8s.io images import -
+nerdctl save mytest/large:1.0 | sudo ctr -n=k8s.io images import -
 
-sudo ctr -n=k8s.io images ls
-
+sudo ctr -n=k8s.io images ls | grep mytest
