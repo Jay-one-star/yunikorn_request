@@ -9,9 +9,10 @@ echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
 
 
-nerdctl build -t mytest/small:1.0 .
-nerdctl build -t mytest/medium:1.0 .
-nerdctl build -t mytest/large:1.0 .
+sudo nerdctl --namespace k8s.io build -t mytest/small:1.0 .
+sudo nerdctl --namespace k8s.io build -t mytest/medium:1.0 .
+sudo nerdctl --namespace k8s.io build -t mytest/large:1.0 .
+
 
 nerdctl save mytest/small:1.0 | sudo ctr -n=k8s.io images import -
 nerdctl save mytest/medium:1.0 | sudo ctr -n=k8s.io images import -
