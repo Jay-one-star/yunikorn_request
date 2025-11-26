@@ -1,18 +1,5 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: test-small
-  labels:
-    app: test-small
-spec:
-  containers:
-    - name: small
-      image: busybox
-      command: ["sh", "-c", "echo small pod running; sleep 600"]
-      resources:
-        requests:
-          cpu: "100m"
-          memory: "128Mi"
-        limits:
-          cpu: "200m"
-          memory: "256Mi"
+#!/bin/sh
+echo "Small workload running"
+sleep 5
+exit 0
+
